@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>হিসাব-কিতাব | Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JavaScript -->
+    <script src="script.js" defer></script>
+</head>
+
+<body id="bodyTheme" class="dark-mode">
+
+    <!-- =====================================================
+         HEADER SECTION
+    ====================================================== -->
+    <header class="exact-header">
+
+        <!-- Logo -->
+        <div
+            class="header-logo-pill"
+            onclick="document.getElementById('headerLogoFileInput').click()"
+            title="লোগো পরিবর্তন করতে ক্লিক করুন"
+        >
+            <input
+                type="file"
+                id="headerLogoFileInput"
+                accept="image/*"
+                style="display: none;"
+                onchange="previewHeaderLogo(event)"
+            >
+
+            <img
+                src="logo.png"
+                alt="Logo"
+                class="brand-logo-circle"
+                id="headerBrandLogo"
+                onerror="this.src='https://via.placeholder.com/40?text=LOGO';"
+            >
+
+            <div class="logo-text-info">
+                <span
+                    class="logo-title"
+                    data-en="Everything"
+                    data-bn="সবকিছু"
+                >
+                    সবকিছু
+                </span>
+
+                <span
+                    class="logo-sub"
+                    data-en="Bazar"
+                    data-bn="বাজার"
+                >
+                    বাজার
+                </span>
+            </div>
+        </div>
+
+
+        <!-- Search -->
+        <div class="header-search-pill">
+            <span class="search-icon">🔍</span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="সার্চ করুন (যেমন: মাছ, হিসাব, ইত্যাদি)..."
+                autocomplete="off"
+            >
+        </div>
+
+
+        <!-- Header Right Group -->
+        <div class="header-right-group">
+
+            <!-- Live Time -->
+            <div class="date-filter-pill">
+                <span class="date-icon-left">⏰</span>
+
+                <div class="date-content">
+                    <span
+                        class="date-label"
+                        data-en="Live Time"
+                        data-bn="লাইভ টাইম"
+                    >
+                        লাইভ টাইম
+                    </span>
+
+                    <span
+                        class="date-value"
+                        id="liveTimeDisplay"
+                    >
+                        00:00:00 AM
+                    </span>
+                </div>
+            </div>
+
+
+            <!-- Today Date -->
+            <div class="date-filter-pill">
+                <span class="date-icon-left">📅</span>
+
+                <div class="date-content">
+                    <span
+                        class="date-label"
+                        data-en="Today Date"
+                        data-bn="আজকের তারিখ"
+                    >
+                        আজকের তারিখ
+                    </span>
+
+                    <span
+                        class="date-value"
+                        id="liveDateDisplay"
+                    >
+                        00/00/0000
+                    </span>
+                </div>
+            </div>
+
+
+            <!-- Language Button -->
+            <button
+                type="button"
+                class="icon-pill-btn"
+                id="langToggleBtn"
+                onclick="toggleLanguage()"
+                title="ভাষা পরিবর্তন"
+            >
+                EN
+            </button>
+
+
+            <!-- Theme Button -->
+            <button
+                type="button"
+                class="icon-pill-btn"
+                id="themeToggleBtn"
+                onclick="toggleTheme()"
+                title="থিম পরিবর্তন"
+            >
+                ☀️
+            </button>
+
+
+            <!-- =================================================
+                 PROFILE DROPDOWN
+            ================================================== -->
+            <div class="profile-dropdown-wrapper">
+
+                <div
+                    class="user-profile-pill"
+                    onclick="toggleProfileDropdown(event)"
+                    title="প্রোফাইল মেনু খুলতে ক্লিক করুন"
+                >
+
+                    <img
+                        src="https://via.placeholder.com/35"
+                        alt="Profile"
+                        class="user-avatar"
+                        id="headerUserAvatar"
+                    >
+
+                    <div class="user-text-info">
+
+                        <div
+                            class="user-display-name"
+                            id="displayUserName"
+                        >
+                            MD OMAR FARUK
+                        </div>
+
+                        <div
+                            class="user-display-email"
+                            id="displayUserEmail"
+                        >
+                            sobkichubazar2026@gmail.com
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Profile Popup -->
+                <div
+                    class="profile-popup-menu"
+                    id="profilePopupMenu"
+                >
+
+                    <div class="popup-header-info">
+
+                        <strong id="popupRoleTitle">
+                            সুপার অ্যাডমিন
+                        </strong>
+
+                        <span>
+                            সক্রিয় সেশন
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        onclick="openMyPersonalProfile(event)"
+                        class="popup-menu-item"
+                    >
+                        <span class="menu-icon">⚙️</span>
+                        প্রোফাইল সেটিংস ও এডিট
+                    </button>
+
+
+                    <div class="popup-divider"></div>
+
+
+                    <button
+                        type="button"
+                        onclick="handleLogout()"
+                        class="popup-menu-item logout-item"
+                    >
+                        <span class="menu-icon">🚪</span>
+                        লগআউট
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN APP LAYOUT
+    ====================================================== -->
+    <div class="app-layout-wrapper">
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+        <aside class="sidebar-menu">
+
+            <!-- Dynamic Files -->
+            <div
+                class="sidebar-links-container"
+                id="sidebarFilesContainer"
+            >
+                <!-- JavaScript এখানে ফাইল তৈরি করবে -->
+            </div>
+
+
+            <!-- Add New File -->
+            <div style="padding: 10px 0;">
+
+                <button
+                    type="button"
+                    onclick="addNewCustomFile()"
+                    class="add-new-file-btn"
+                >
+                    ➕ নিউ ফাইল যোগ করুন
+                </button>
+
+            </div>
+
+
+            <!-- Sidebar Footer -->
+            <div
+                class="sidebar-footer"
+                id="sidebarFooterContainer"
+            >
+                <!-- JavaScript এখানে User Management দেখাবে -->
+            </div>
+
+        </aside>
+
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+        <main
+            class="main-content-area"
+            id="mainContentArea"
+        >
+
+
+            <!-- =================================================
+                 WELCOME SECTION
+            ================================================== -->
+            <section class="welcome-banner-section">
+
+                <div class="welcome-card card-one">
+
+                    <h2>
+                        স্বাগতম হিসাব-কিতাব ড্যাশবোর্ডে!
+                    </h2>
+
+                    <p>
+                        আপনার দৈনিক আয়, ব্যয় ও অন্যান্য হিসাব সহজে সংরক্ষণ করুন।
+                    </p>
+
+                </div>
+
+
+                <div class="welcome-card card-two">
+
+                    <h2>
+                        আপনার হিসাব এক জায়গায়
+                    </h2>
+
+                    <p>
+                        প্রয়োজন অনুযায়ী নতুন হিসাবের ফাইল তৈরি করুন।
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 DASHBOARD CARDS
+            ================================================== -->
+            <section class="dashboard-cards-grid">
+
+
+                <!-- CARD 1 -->
+                <div
+                    class="stat-card card-number-1"
+                    onclick="openCardNewTab(event, 1)"
+                    oncontextmenu="handleCardRightClick(event, this)"
+                >
+
+                    <!-- Edit Button -->
+                    <button
+                        type="button"
+                        class="card-edit-btn"
+                        onclick="editCardName(event, 1)"
+                        title="রিনেম করুন"
+                    >
+                        ✏️
+                    </button>
+
+
+                    <!-- Card Content -->
+                    <div class="card-center-content">
+
+                        <span
+                            class="card-title-text"
+                            id="cardTitle1"
+                        >
+                            কার্ড নম্বর ১
+                        </span>
+
+                        <div class="card-bottom-line"></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FUTURE CARDS
+                     বর্তমানে hidden রাখা হয়েছে
+                ================================================== -->
+
+                <div
+                    class="stat-card placeholder-card"
+                    style="display: none;"
+                ></div>
+
+                <div
+                    class="stat-card placeholder-card"
+                    style="display: none;"
+                ></div>
+
+                <div
+                    class="stat-card placeholder-card"
+                    style="display: none;"
+                ></div>
+
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CUSTOM RIGHT CLICK CONTEXT MENU
+    ====================================================== -->
+    <div
+        id="customContextMenu"
+        class="context-menu"
+    >
+
+        <div
+            onclick="renameFilePrompt()"
+        >
+            ✏️ রিনেম করুন
+        </div>
+
+
+        <div
+            id="contextDeleteOption"
+            onclick="deleteFileAction()"
+        >
+            🗑️ ডিলিট করুন
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         IMPORTANT
+         এখানে আর কোনো </script> থাকবে না।
+         JavaScript আলাদা script.js ফাইল থেকে load হবে।
+    ====================================================== -->
+
+</body>
+</html>

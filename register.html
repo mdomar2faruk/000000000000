@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>রেজিস্টার | হিসাব-কিতাব</title>
+
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <div class="auth-page">
+
+        <div class="auth-card">
+
+            <div class="auth-logo">
+                📊
+            </div>
+
+            <h1>হিসাব-কিতাব</h1>
+
+            <p class="auth-subtitle">
+                নতুন অ্যাকাউন্ট তৈরি করুন
+            </p>
+
+            <form id="registerForm">
+
+                <div class="form-group">
+                    <label for="registerName">
+                        সম্পূর্ণ নাম
+                    </label>
+
+                    <input
+                        type="text"
+                        id="registerName"
+                        placeholder="আপনার সম্পূর্ণ নাম লিখুন"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">
+                        ইমেইল
+                    </label>
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="আপনার ইমেইল লিখুন"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">
+                        পাসওয়ার্ড
+                    </label>
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        পাসওয়ার্ড নিশ্চিত করুন
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="পাসওয়ার্ড আবার লিখুন"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+                </div>
+
+                <div
+                    id="registerMessage"
+                    class="auth-message"
+                    style="display: none;"
+                ></div>
+
+                <button
+                    type="submit"
+                    class="auth-submit-btn"
+                    id="registerBtn"
+                >
+                    রেজিস্টার করুন
+                </button>
+
+            </form>
+
+            <div class="auth-footer">
+
+                <span>
+                    ইতিমধ্যে অ্যাকাউন্ট আছে?
+                </span>
+
+                <a href="login.html">
+                    লগইন করুন
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="auth.js"></script>
+
+</body>
+</html>
